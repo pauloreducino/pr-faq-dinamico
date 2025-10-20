@@ -1,4 +1,4 @@
-# Plugin: PR Dynamic FAQ Accordion
+# Plugin: Dynamic FAQ Accordion
 
 **Version:** 1.0
 **Author:** Paulo Reducino
