@@ -1,14 +1,14 @@
 <?php
 /**
- * Plugin Name:       Acordeão de FAQ Dinâmico (do Paulo)
+ * Plugin Name:       Dynamic FAQ Accordion - with Schema.org
  * Plugin URI:        https://www.linkedin.com/in/pauloreducino/
  * Description:       Adiciona um acordeão de FAQ dinâmico com Schema.org através do shortcode [faq_accordion][faq_item]...[/faq_item][/faq_accordion].
- * Version:           2.1
+ * Version:           1.0
  * Author:            Paulo Reducino
  * Author URI:        https://www.linkedin.com/in/pauloreducino/
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       paulo-faq-dinamico
+ * Text Domain:       pr-faq-dinamico
  */
 
 // Medida de segurança: impede o acesso direto ao arquivo.
@@ -46,7 +46,7 @@ function paulo_faq_accordion_shortcode( $atts, $content = null ) {
     $items = Paulo_FAQ_Data::$items;
     if ( empty( $items ) ) {
         return '';
-    }
+    } 
 
     $schema_entities = [];
     $html_items      = '';
@@ -106,8 +106,8 @@ function paulo_faq_accordion_shortcode( $atts, $content = null ) {
     wp_enqueue_style('faq-accordion-styles');
     wp_add_inline_style('faq-accordion-styles', $css_faq);
 
-    // --- CORREÇÃO APLICADA AQUI ---
-    // Em vez de depender do 'jquery', vamos registrar nosso próprio script "handle"
+    
+    // Vamos registrar nosso próprio script "handle"
     // para garantir que o JS seja carregado no rodapé (o 'true' no final).
     wp_register_script('paulo-faq-script-handle', false, [], null, true);
     wp_enqueue_script('paulo-faq-script-handle');
