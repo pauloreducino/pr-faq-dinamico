@@ -44,7 +44,7 @@ function pr_faq_item_shortcode( $atts, $content = null ) {
             'answer_html' => apply_filters( 'the_content', $content ), // Renderiza HTML e parágrafos
         ];
     }
-    
+
     return '';
 }
 add_shortcode( 'faq_item', 'pr_faq_item_shortcode' );
@@ -56,7 +56,7 @@ add_shortcode( 'faq_item', 'pr_faq_item_shortcode' );
  * Renderiza o acordeão completo, o schema e enfileira os scripts/estilos.
  */
 function pr_faq_accordion_shortcode( $atts, $content = null ) {
-    
+
     // 1. Resetar e Coletar Dados
     PR_FAQ_Data::$items = [];
     do_shortcode( $content );
@@ -104,7 +104,7 @@ function pr_faq_accordion_shortcode( $atts, $content = null ) {
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
         .faq-accordion{font-family:'Poppins',sans-serif;border:1px solid #e0eaf6;border-radius:16px;padding:2.5rem;background-color:#fff;max-width:800px;margin:2rem auto;box-shadow:0 4px 15px rgba(201,223,247,.3)}.faq-item{border-bottom:1px solid #e0eaf6}.faq-item:last-child{border-bottom:none}.faq-question{background:0 0;border:none;text-align:left;width:100%;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 0;cursor:pointer;font-size:1.1rem;font-weight:500;color:#334155;transition:color .2s ease-in-out}.faq-question:hover{color:#378FB5}.faq-question::after{content:'+';flex-shrink:0;margin-left:1rem;width:32px;height:32px;display:flex;justify-content:center;align-items:center;border:1px solid #c9dff7;border-radius:50%;font-size:1.5rem;font-weight:400;color:#378FB5;transition:transform .3s ease,background-color .2s ease}.faq-question.active{color:#378FB5;font-weight:600}.faq-question.active::after{content:'−';transform:rotate(180deg);background-color:#f0f7ff}.faq-answer{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.25,.1,.25,1);color:#475569;font-size:1rem;font-weight:400;line-height:1.6}.faq-answer p{margin-bottom:1rem}.faq-answer ul{list-style-position:inside;padding-left:1rem;margin-bottom:1rem}.faq-answer li{margin-bottom:.5rem}.faq-answer > div{padding-bottom:1.5rem}@media (max-width:768px){.faq-accordion{padding:1.5rem}.faq-question{font-size:1rem;padding:1.2rem 0}.faq-answer{font-size:.95rem}}
     ";
-    
+
     $js_faq = "
         document.addEventListener('DOMContentLoaded', function () {
             const questions = document.querySelectorAll('.faq-question');
@@ -121,15 +121,15 @@ function pr_faq_accordion_shortcode( $atts, $content = null ) {
             });
         });
     ";
-    
+
     wp_register_style('pr-faq-styles', false);
     wp_enqueue_style('pr-faq-styles');
     wp_add_inline_style('pr-faq-styles', $css_faq);
-    
+
     wp_register_script('pr-faq-script', false, [], null, true);
     wp_enqueue_script('pr-faq-script');
     wp_add_inline_script('pr-faq-script', $js_faq, 'after');
-    
+
     // 5. Retornar o HTML
     return $schema_jsonld . '<div class="faq-accordion">' . $html_items . '</div>';
 }
